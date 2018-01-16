@@ -37,6 +37,7 @@ var vm = new Vue({
 			});
     },
     setDefault: function(addressId) {
+    	//address代表的是对象组里的一个对象
       this.addressList.forEach(function (address, index) {
         if (address.addressId == addressId) {
           address.isDefault = true;

@@ -100,10 +100,13 @@ calcTotalPrice: function () {
 //删除商品
 delConfirm: function (item) {
   this.delFlag = true;
+  //保存获取到的对象
   this.curProduct = item;
 },
 delProduct: function () {
+	//获取对象的索引值
   var index = this.productList.indexOf(this.curProduct);
+  //从对象组的当前索引值开始删除，删除一个元素
   this.productList.splice(index, 1);
   this.delFlag = false;
 }

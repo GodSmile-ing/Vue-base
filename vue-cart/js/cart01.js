@@ -89,11 +89,11 @@ var vm = new Vue({
     delConfirm: function (item) {
       //显示遮罩层
       this.delFlag = true;
-      //保存要被删除的商品数据
+      //保存要被删除的对象
       this.curProduct = item;
     },
     delProduct: function () {
-      //获取到商品的索引
+      //获取到对象的索引
       var index = this.productList.indexOf(this.curProduct);
       this.productList.splice(index, 1);
       this.delFlag = false;
