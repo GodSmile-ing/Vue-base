@@ -127,7 +127,18 @@ checkAll: function (flag) {
 费了好长段时间，终于分析完了，[点击查看演示](https://cruxf.github.io/Vue-base/vue-cart/address01.html)。之前断断续续看了几遍视频，却总是不明就里，原来是过于浮躁，急于求成，导致浪费很多时间。其实对于技术，我现在才明白：不努力去理解代码，那么敲再多、敲再久能力也不会有任何的提高。<br><br>
 
 
+# 2、vue-tab => Vue实现选项卡效果
 
+这是一个利用Vue数据驱动特点做的一个选项卡，相比于纯JavaScript或者jQuery来说，方便简洁了不少。该案例原地址[请戳这里](https://juejin.im/post/5a0c191f6fb9a04514639419)<br>
+
+案例的实现思路非常简单，一步步来说。<br>
+1、点击顶部样式发生改变：<br>
+当点击a标签的时候，会得到一个curId的属性和值，而类名为cur的class则根据curId属性的值来决定是否添加。<br>
+
+2、底部文字变化：<br>
+因为vue是根据数据的变化而实现某些功能的，数据驱动是vue的一大亮点。在点击a标签的时候，就创建了数据curId，v-bind:class和v-show都根据数据的真假而做出相应的行为。<br>
+
+[点我查看效果呀](https://cruxf.github.io/Vue-base/vue-tab/index.html)<br><br>
 
 
 
