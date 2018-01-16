@@ -88,7 +88,48 @@ checkAll: function (flag) {
 
 **地址选项分析：** <br>
 
-1、渲染出所有地址，这个和前面的购物车渲染商品信息大同小异
+1、渲染出所有地址<br>
+【分析】<br>
+这个和前面的购物车渲染商品信息大同小异，需要注意的是json里面的数据，因为有时候数据的不用，我们调取json数据要写的代码也是不一样的。<br><br>
+
+2、开始默认显示3组数据<br>
+【分析】<br>
+要实现这个功能，我们需要明白的就是v-for指令里面不仅仅可以循环对象组，还可以循环方法，只要方法中返回的是一组对象即可，并且该方法要在计算属性中定义，因为在截取数据前，首先的缓存数据，截取数据使用的方法为：slice()。<br><br>
+
+3、显示更多<br>
+【分析】<br>
+可以定义一个方法，改变数据截取的数量。下面介绍一个利用三元运算符来实现这个功能：<br>
+`<a class="addr-more-btn up-down-btn" href="javascript:" @click="(limitNum == 3) ? limitNum=addressList.length : limitNum=3">`<br><br>
+
+4、选中样式切换<br>
+【分析】<br>
+我们都知道，在v-for指令中，能将数据的索引值遍历出来，那么这个索引值有什么用呢？下面请看一段代码：<br>
+`<li v-for="(item,index) in filterAddress" v-bind:class="{'check': index == currentIndex}" @click="currentIndex=index">`<br>
+该段代码十分巧妙的使用索引值来实现点击切换样式，它的实现原理就像是：2 = y？然后点击事件触发的时候，就把y赋值为2（2在这象征的是索引值），因此2 = y为true，故check这个类被添加进去。<br><br>
+
+5、设置默认地址<br>
+【分析】<br>
+在json文件中，我们有个属性是用来说明页面是显式“设为默认”还是“默认地址”，这个功能我们可以通过v-if去实现。当我们点击“设为默认”的时候，可以调用一个方法，传递的参数为当前对象的ID值，接着我们去遍历对象组，判断对象组里面是否有对象的ID值等于传递进来的对象ID值，如果相等，则把“默认地址”显示出来，而其他的则隐藏。<br><br>
+
+6、配送方式选项<br>
+【分析】<br>
+实现思路与技巧都与第4步“选中样式切换”一样。可以看以下代码：<br>
+```
+<li v-bind:class="{'check': shippingMethod == 1}" @click="shippingMethod = 1">
+  <div class="name">标准配送</div>
+  <div class="price">Free</div>
+</li>
+<li v-bind:class="{'check': shippingMethod == 2}" @click="shippingMethod = 2">
+  <div class="name">高级配送</div>
+  <div class="price">180</div>
+</li>
+```
+费了好长段时间，终于分析完了。之前断断续续看了几遍视频，却总是不明就里，原来是过于浮躁，急于求成，导致浪费很多时间。其实对于技术，我现在才明白：不努力去理解代码，那么敲再多、敲再久能力也不会有任何的提高。<br><br>
+
+
+
+
+
 
 
 
