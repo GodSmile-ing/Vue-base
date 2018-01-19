@@ -143,17 +143,23 @@ checkAll: function (flag) {
 
 # 3、vue-compret => Vue实现对数据的增删查
 
-案例需求：创建一个品牌展示表格，表头有编号（id），品牌名称（name），创建时间（time）和操作，需要实现的功能是对数据的增删查操作，和时间的格式化。这是一个[初始的静态页](https://cruxf.github.io/Vue-base/vue-compre/index01.html)<br>
+#### 案例需求：
+创建一个品牌展示表格，表头有编号（id），品牌名称（name），创建时间（time）和操作，需要实现的功能是对数据的增删查操作，和时间的格式化。这是一个[初始的静态页](https://cruxf.github.io/Vue-base/vue-compre/index01.html)<br>
 
-开发步骤一：使用v-for指令遍历展示数据，最终呈现效果[点我看效果呀](https://cruxf.github.io/Vue-base/vue-compre/index02.html)<br>
+**开发步骤一：** <br>
+使用v-for指令遍历展示数据，最终呈现效果[点我看效果呀](https://cruxf.github.io/Vue-base/vue-compre/index02.html)<br>
 
-开发步骤二：删除数据。首先，我们需要定义一个鼠标点击事件，并传入一个参数，当做被选中目标的ID值；接着我们要在Vue实例中定义一个方法，接收传递过来的参数，并将其保存下来，让对象的id等于传入的id；最后根据保存下来的id来删除指定的对象，在这过程中，要知道两个方法findIndex()和splice()[点我看效果呀](https://cruxf.github.io/Vue-base/vue-compre/index03.html)<br>
+**开发步骤二：** <br>
+删除数据。首先，我们需要定义一个鼠标点击事件，并传入一个参数，当做被选中目标的ID值；接着我们要在Vue实例中定义一个方法，接收传递过来的参数，并将其保存下来，让对象的id等于传入的id；最后根据保存下来的id来删除指定的对象，在这过程中，要知道两个方法findIndex()和splice()[点我看效果呀](https://cruxf.github.io/Vue-base/vue-compre/index03.html)<br>
 
-开发步骤三：增加数据。不用多想，使用双向数据绑定指令v-model，在静态页面中国绑定相关的数据；接着将数据传递进一个方法中，把数据包装成数组要求的对象；最后将对象追加到数组中，并将输入框清空[点我看效果呀](https://cruxf.github.io/Vue-base/vue-compre/index04.html)<br>
+**开发步骤三：** <br>
+增加数据。不用多想，使用双向数据绑定指令v-model，在静态页面中国绑定相关的数据；接着将数据传递进一个方法中，把数据包装成数组要求的对象；最后将对象追加到数组中，并将输入框清空[点我看效果呀](https://cruxf.github.io/Vue-base/vue-compre/index04.html)<br>
 
-开发步骤四：格式化时间。这里采用的全局过滤器，期间需要明白如何定义一个全局过滤器？如何调用全局过滤器？以及过滤器中各个参数的含义分别是什么[点我看效果呀](https://cruxf.github.io/Vue-base/vue-compre/index05.html)<br>
+**开发步骤四：** <br>
+格式化时间。这里采用的全局过滤器，期间需要明白如何定义一个全局过滤器？如何调用全局过滤器？以及过滤器中各个参数的含义分别是什么[点我看效果呀](https://cruxf.github.io/Vue-base/vue-compre/index05.html)<br>
 
-开发步骤五：查找数据。难以开口，似懂非懂，稍后再来分析分析[点我看效果呀](https://cruxf.github.io/Vue-base/vue-compre/index06.html)<br>
+**开发步骤五：** <br>
+查找数据。难以开口，似懂非懂，稍后再来分析分析[点我看效果呀](https://cruxf.github.io/Vue-base/vue-compre/index06.html)<br>
 
 
 
