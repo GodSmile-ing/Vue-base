@@ -141,7 +141,7 @@ checkAll: function (flag) {
 [点我查看效果呀](https://cruxf.github.io/Vue-base/vue-tab/index.html)<br><br>
 
 
-# 3、vue-compret => Vue实现对数据的增删查
+# 3、vue-compre => Vue实现对数据的增删查
 
 ### 案例需求：
 创建一个品牌展示表格，表头有编号（id），品牌名称（name），创建时间（time）和操作，需要实现的功能是对数据的增删查操作，和时间的格式化。这是一个[初始的静态页](https://cruxf.github.io/Vue-base/vue-compre/index01.html)<br>
