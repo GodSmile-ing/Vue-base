@@ -143,7 +143,7 @@ checkAll: function (flag) {
 
 # 3、vue-compret => Vue实现对数据的增删查
 
-#### 案例需求：
+### 案例需求：
 创建一个品牌展示表格，表头有编号（id），品牌名称（name），创建时间（time）和操作，需要实现的功能是对数据的增删查操作，和时间的格式化。这是一个[初始的静态页](https://cruxf.github.io/Vue-base/vue-compre/index01.html)<br>
 
 **开发步骤一：** <br>
@@ -153,13 +153,31 @@ checkAll: function (flag) {
 删除数据。首先，我们需要定义一个鼠标点击事件，并传入一个参数，当做被选中目标的ID值；接着我们要在Vue实例中定义一个方法，接收传递过来的参数，并将其保存下来，让对象的id等于传入的id；最后根据保存下来的id来删除指定的对象，在这过程中，要知道两个方法findIndex()和splice()[点我看效果呀](https://cruxf.github.io/Vue-base/vue-compre/index03.html)<br>
 
 **开发步骤三：** <br>
-增加数据。不用多想，使用双向数据绑定指令v-model，在静态页面中国绑定相关的数据；接着将数据传递进一个方法中，把数据包装成数组要求的对象；最后将对象追加到数组中，并将输入框清空[点我看效果呀](https://cruxf.github.io/Vue-base/vue-compre/index04.html)<br>
+增加数据。不用多想，使用双向数据绑定指令v-model，在静态页面中绑定相关的数据；接着将数据传递进一个方法中，把数据包装成数组要求的对象；最后将对象追加到数组中，并将输入框清空[点我看效果呀](https://cruxf.github.io/Vue-base/vue-compre/index04.html)<br>
 
 **开发步骤四：** <br>
 格式化时间。这里采用的全局过滤器，期间需要明白如何定义一个全局过滤器？如何调用全局过滤器？以及过滤器中各个参数的含义分别是什么[点我看效果呀](https://cruxf.github.io/Vue-base/vue-compre/index05.html)<br>
 
 **开发步骤五：** <br>
-查找数据。难以开口，似懂非懂，稍后再来分析分析[点我看效果呀](https://cruxf.github.io/Vue-base/vue-compre/index06.html)<br>
+查找数据。在这一过程中，v-for指令不再是遍历遍历已经被写好的数组对象里的数据了，而是要遍历一个在计算属性里定义的函数。在该函数里面，首先判断搜索框里面是否有值，如果没有，则返回原先的数组对象；如果有，那么就在原先数组上定义一个过滤器，在过滤器中又返回一个数组，然后在数组中查找存在的值并将其返回。在这过程中，要知道Object.keys()方法、some()方法、toLowerCase()方法以及indexOf()方法[点我看效果呀](https://cruxf.github.io/Vue-base/vue-compre/index06.html)<br>
+
+**开发中所用到的方法：** <br>
+
+1、findIndex()：返回传入一个测试条件（函数）符合条件的数组第一个元素位置[更多详情](http://www.runoob.com/jsref/jsref-findindex.html)<br>
+
+2、splice()：向/从数组中添加/删除项目，然后返回被删除的项目[更多详情](http://www.w3school.com.cn/jsref/jsref_splice.asp)<br>
+
+3、Object.keys()：会返回一个由一个给定对象的自身可枚举属性组成的数组，数组中属性名的排列顺序和使用 for...in 循环遍历该对象时返回的顺序一致 （两者的主要区别是 一个 for-in 循环还会枚举其原型链上的属性）[更多详情](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/keys)<br>
+
+4、some()：只要数组中有一项在callback上被返回true，就返回true[更多详情](https://www.cnblogs.com/linsx/p/6796888.html)<br>
+
+5、toLowerCase()：用于把字符串转换为小写。<br>
+
+6、indexOf()：用来判断数组是否包含某个元素项目[更多详情](https://www.cnblogs.com/laneyfu/p/6136777.html)<br>
+
+7、filter()：过滤筛选（callback在这里担任的是过滤器的角色，当元素符合条件，过滤器就返回true，而filter则会返回所有符合过滤条件的元素）[更多详情](https://www.cnblogs.com/linsx/p/6796888.html)<br>
+
+
 
 
 
