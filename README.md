@@ -1,6 +1,6 @@
 # 学习资源
 
-1、[vue-tutorials](https://github.com/keepfool/vue-tutorials)<br>
+[vue基础知识大全](https://github.com/keepfool/vue-tutorials)<br>
 
 
 # 1、vue-cart => 实现购物车和地址选配功能
