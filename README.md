@@ -250,10 +250,55 @@ ChildrenOnclick() {
 【解析】
 上面代码中，`@delete`是子组件自定义的事件，当该事件在子组件被触发的时候，那么`handleParentClick`这个方法就会被执行，请看[完整的代码](https://github.com/CruxF/Vue-base/blob/master/vue-module/src/components/parent/ParentTwo.vue?1525683050063)，以便更好的理解。
 
+**3、兄弟组件传值** 
+这块我还不是灰常明白，只是知道大概如何去实现。首先在由vue-cli搭建起来的项目中的main.js创建一个事件总线，也就是中转站，作为通信的桥梁。核心代码如下：
+```
+// 建立中转站，实现组件与组件之间的传值
+let bus = new Vue()
+Vue.prototype.bus = bus
+```
+main.js[完整代码](https://github.com/CruxF/Vue-base/blob/master/vue-module/src/main.js?1525684248803)请点击哦。
 
 
+接着我们在发送方组件里面使用关键字`$emit()`定义一个自定义事件，并传入参数。核心代码如下：
+```
+methods: {
+  btnMessage() {
+    this.bus.$emit("ReceiveMessage", this.message)
+  }
+}
+```
+【解析】
+上面代码中，`this.bus`为在main.js里定义好的一个中转站变量，`ReceiveMessage`为自定义事件，`this.message`为定义好的参数。[完整代码](https://github.com/CruxF/Vue-base/blob/master/vue-module/src/components/brother/BrotherOne.vue)在此。^_^
 
+最后是接收方组件，只要使用`this.bus.$on`关键字就能够监听到发送方触发的事件，并在内部通过一个函数接收传入进来的参数，执行相关的动作，下面请看完整代码：
+```
+<template>
+  <div class="brotherOne">
+    <h5>我是接收方组件，下面是接收到的信息</h5>
+    <span>{{name}}</span>
+  </div>
+</template>
+<script>
+  export default {
+    name: 'BrotherTwo',
+    data() {
+      return {
+        name: "我缺爱啊"
+      }
+    },
+    mounted() {
+      let self = this;
+      this.bus.$on("ReceiveMessage", function(item) {
+        self.name = item;
+      })
+    }
+  }
+</script>
+<style>
 
+</style>
+```
 
 
 
