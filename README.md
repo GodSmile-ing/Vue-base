@@ -312,6 +312,14 @@ methods: {
 
 </style>
 ```
+### 项目运行
 
+```
+步骤一:git clone git@github.com:CruxF/Vue-base.git
+步骤二:cd Vue-base
+步骤三:cd vue-moudle
+步骤四:npm install  （前提：安装好了node、npm、git、webpack）
+步骤五:npm run dev
+```
 
 
