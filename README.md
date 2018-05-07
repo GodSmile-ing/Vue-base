@@ -185,6 +185,54 @@ checkAll: function (flag) {
 7、filter()：过滤筛选（callback在这里担任的是过滤器的角色，当元素符合条件，过滤器就返回true，而filter则会返回所有符合过滤条件的元素）[更多详情](https://www.cnblogs.com/linsx/p/6796888.html)<br>
 
 
+# 4、vue-moudle => Vue各类组件传值的实现方式
+
+1、父组件向子组件传值
+首先在父组件定义好数据，接着将子组件导入到父组件中。父组件只要在调用子组件的地方使用v-bind指令定义一个属性，并传值在该属性中即可，此时父组件的使命完成，请看下面关键代码：
+```
+<div class="parentOne">
+  <children-item :content="item" v-for="item in list" :key="item.id"></children-item>
+</div>
+```
+【解析】
+上面代码中`<children-item></children-item>`是导入进来的子组件，`content`是被v-bind指令定义的属性，当然不用v-bind指令定义也一样可以。只不过加了V-bind指令后，属性值就会被当做JavaScript表达式来解析，而不加v-bind指令就会被当做字符串解析。比如`Boolean="false"和:Boolean="false"`解析出来的结果是不同滴。如果还是有点迷糊，请来看[完整源码]()
+
+好了，下面我们来看看子组件此时要做的事情是什么？
+
+首先在子组件中要使用关键词`props`接收父组件传递过来的属性，然后直接对这个属性动手动脚就行了，十分简单，在这直接上完整源码：
+```
+<template>
+  <div class="ChildrenOne">
+    <ul>
+      <li v-for="childItem in content">{{childItem}}</li>
+      <li>{{message}}</li>
+    </ul>
+  </div>
+</template>
+<script>
+  export default {
+    name: 'ChildrenOne',
+    props: ["content"],
+    data() {
+      return {
+        message: this.content.id
+      }
+    }
+  }
+</script>
+<style>
+
+</style>
+```
+
+
+
+
+
+
+
+
+
 
 
 
