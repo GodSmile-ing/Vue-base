@@ -187,7 +187,9 @@ checkAll: function (flag) {
 
 # 4、vue-moudle => Vue各类组件传值的实现方式
 
+
 **1、父组件向子组件传值** 
+
 首先在父组件定义好数据，接着将子组件导入到父组件中。父组件只要在调用子组件的地方使用v-bind指令定义一个属性，并传值在该属性中即可，此时父组件的使命完成，请看下面关键代码：
 ```
 <div class="parentOne">
@@ -195,9 +197,12 @@ checkAll: function (flag) {
 </div>
 ```
 【解析】
+
 上面代码中`<children-item></children-item>`是导入进来的子组件，`content`是被v-bind指令定义的属性，当然不用v-bind指令定义也一样可以。只不过加了V-bind指令后，属性值就会被当做JavaScript表达式来解析，而不加v-bind指令就会被当做字符串解析。比如`Boolean="false"和:Boolean="false"`解析出来的结果是不同滴。如果还是有点迷糊，请来看[完整源码](https://github.com/CruxF/Vue-base/blob/master/vue-module/src/components/parent/ParentOne.vue)
 
+
 好了，下面我们来看看子组件此时要做的事情是什么？
+
 
 首先在子组件中要使用关键词`props`接收父组件传递过来的属性，然后直接对这个属性动手动脚就行了，十分简单，在这直接上完整源码：
 ```
@@ -226,6 +231,7 @@ checkAll: function (flag) {
 ```
 
 **2、子组件向父组件传值** 
+
 子组件向父组件传值这一个技术点有个专业名词，叫做“发布订阅模式”，很明显在这里子组件为发布方，而父组件为订阅方。根据这个专业名词，我们来看看子组件里面发生的事情。首先，需要触发子组件视图层里的某个事件，接着由该事件触发的方法中又使用关键方法`$emit()`发布了一个自定义的事件，并且能够传入相关的参数。子组件所要的事情就只有这么多，下面我们看看核心源码：
 ```
 ChildrenOnclick() {
@@ -234,7 +240,9 @@ ChildrenOnclick() {
 }
 ```
 【解析】
+
 上面代码中，当ChildrenOnclick方法被触发的时候，自定义了一个delete事件，并传入了相关参数`this.index`。这里是[完整源码](https://github.com/CruxF/Vue-base/blob/master/vue-module/src/components/children/ChildrenTwo.vue?1525682691399)，能帮助你更好的理解。
+
 
 在父组件中，只要订阅由子组件发布的自定义事件即可。只要子组件的自定义事件被触发，那么父组件就会执行相关的方法，下面是核心代码：
 ```
@@ -248,16 +256,19 @@ ChildrenOnclick() {
 </children-item>
 ```
 【解析】
+
 上面代码中，`@delete`是子组件自定义的事件，当该事件在子组件被触发的时候，那么`handleParentClick`这个方法就会被执行，请看[完整的代码](https://github.com/CruxF/Vue-base/blob/master/vue-module/src/components/parent/ParentTwo.vue?1525683050063)，以便更好的理解。
 
+
 **3、兄弟组件传值** 
+
 这块我还不是灰常明白，只是知道大概如何去实现。首先在由vue-cli搭建起来的项目中的main.js创建一个事件总线，也就是中转站，作为通信的桥梁。核心代码如下：
 ```
 // 建立中转站，实现组件与组件之间的传值
 let bus = new Vue()
 Vue.prototype.bus = bus
 ```
-main.js[完整代码](https://github.com/CruxF/Vue-base/blob/master/vue-module/src/main.js?1525684248803)请点击哦。
+main.js[完整代码](https://github.com/CruxF/Vue-base/blob/master/vue-module/src/main.js?1525684248803)请点击哦。<br>
 
 
 接着我们在发送方组件里面使用关键字`$emit()`定义一个自定义事件，并传入参数。核心代码如下：
@@ -269,7 +280,9 @@ methods: {
 }
 ```
 【解析】
+
 上面代码中，`this.bus`为在main.js里定义好的一个中转站变量，`ReceiveMessage`为自定义事件，`this.message`为定义好的参数。[完整代码](https://github.com/CruxF/Vue-base/blob/master/vue-module/src/components/brother/BrotherOne.vue)在此。^_^
+
 
 最后是接收方组件，只要使用`this.bus.$on`关键字就能够监听到发送方触发的事件，并在内部通过一个函数接收传入进来的参数，执行相关的动作，下面请看完整代码：
 ```
