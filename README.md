@@ -4,6 +4,8 @@
 
 2、[非常好的一些博文](http://www.cnblogs.com/xiaohuochai/tag/Vue/)<br>
 
+3、[我目前正在整理的大白话说Vue](https://github.com/CruxF/Vue-base/issues/1)
+
 
 # 1、vue-cart => 实现购物车和地址选配功能
 
