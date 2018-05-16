@@ -464,14 +464,69 @@ background-image: url($url + "@3x.png")
 ```
 axios使用过程中目前遇到的坑：使用post方式是无法获得本地json数据的。解决方式参考这里[传送门](https://www.cnblogs.com/yuri2016/p/6784109.html)<br>
 
-以上就是在移动端开发中比较常遇到的问题，至于适配那方面，有时间再来扯一扯。下面是一些刚刚遇见的CSS样式，希望各位大佬能轻点喷.....<br>
+以上就是在移动端开发中比较常遇到的问题，至于适配那方面，有时间再来扯一扯。下面是一些刚刚遇见的比较试用的CSS样式，希望各位大佬能轻点喷.....<br>
+
+**（1）改变input框内的placeholder文字颜色** <br>
+直接上代码，没啥好说的
+```
+input::-webkit-input-placeholder {
+  color: #C9CDD1;
+}
+```
+
+**（2）单选按钮切换自定义样式** <br>
+先看下面一段代码，再来细细分析一下
+```
+input[type=radio] {
+    position: relative;
+    width: 25px;
+    height: 1px;
+  }
+  input[type=radio]::before, input[type=radio]::after {
+    position: absolute;
+    display: block;
+    content: '';
+    border-radius: 50%;
+    transition: .3s all esae;
+  }
+  input[type=radio]::before {
+    top: -10px;
+    left: 0;
+    width: 15px;
+    height: 15px;
+    border: 2px solid #ccc;
+  }
+  input[type=radio]::after {
+    top: -6px;
+    left: 4px;
+    width: 11px;
+    height: 11px;
+    background-color: #fff;
+  }
+  input[type=radio]:checked::before {
+    border-color: #27AE60;
+  }
+  input[type=radio]:checked::after {
+    background-color: #27AE60;
+  }
+```
+【代码分析】<br>
+首先将默认的单选按钮设置相对定位，并且高度为1px，即让默认的单选按钮区域消失。<br>
+接着在单选按钮的之前和之后各插入一个空元素（content），并且为这两个设置统一样式，如定位方式（position）、元素特性（display）、边框样式（border-radius）和过渡动画（transition）。<br>
+当然也要为这两个元素设置单独的样式，在这案例代码中，单选按钮之前的元素为一个背景颜色透明，边框为2px的区域，单选按钮之后的元素为一个有背景颜色的区域。最后是当选中单选按钮区域的时候，改变之前和之后的元素样式即可。<br>
 
 
+今天就先说到这，更多内容请看下回分解！<br>
 
 
-
-
-
+### 项目运行
+```
+步骤一:git clone git@github.com:CruxF/Vue-base.git
+步骤二:cd Vue-base
+步骤三:cd vue-axios
+步骤四:npm install  （前提：安装好了node、npm、git、webpack）
+步骤五:npm run dev
+```
 
 
 
