@@ -324,4 +324,51 @@ methods: {
 步骤五:npm run dev
 ```
 
+# 5、vue-aixos  => vue开发移动端项目小栗子
+捣鼓这个小栗子目的很简单，就是为了持续提高自己开发Vue的熟练度，这个小栗子解决几个目前移动端开发的某些问题，下面一起来看一下吧。<br>
+
+**一：使用stylus解决移动端1px问题** <br>
+关于这个问题的产生，以及大概的解决原理，都在我Blog有较为详细的介绍，在此不再重复说明。现在仔细说一下利用stylus解决1px问题的过程，总共分为以下几个步骤：<br>
+
+- 下载安装stylus的依赖包`cnpm install stylus stylus-loader --save-dev`；
+- 将[这份源码]()copy到你的项目中，通过阅读这份源码和我之前写的博文，应该能理解移动端解决1px的原理；
+- 最后是在需要解决1px的组件中导入该文件，为目标元素设置相应的类名，具体的请看下面的示例：
+```
+<template>
+  <div class="middle">
+    <ul>
+      <li class="border-1px">姓名：</li>
+    </ul>
+  </div>
+</template>
+<script>
+  export default {
+    name: "Middle",    
+  }
+</script>
+<style lang="stylus" scoped="scoped">
+  @import "../../../assets/styles/border.styl";
+  li {
+    font-family: "PingFangSC-Regular";
+    font-size: 16px;
+    color: #2A343D;
+    border-1px(#F0F0F0);
+    padding: 12px 0;
+  }
+</style>
+```
+
+**二：解决移动端开发300ms问题** <br>
+关于问题的产生背景以及解决的原理还是和上文一样，在我的Blog中有介绍。由于现在开发都追求效率，为此我们可以选择通过fastclick插件来解决这个问题，下面是详细步骤：<br>
+
+- 下载安装fastclick的jar包`npm install fastclick --save`；
+- 在通过vue-cli搭建起来的项目中，进入main.js文件，在里面导入`import fastClick from 'fastclick`，最后也是在main.js中使用`fastClick.attach(document.body)`。<br>
+
+
+
+
+
+
+
+
 
