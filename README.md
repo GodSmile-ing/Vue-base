@@ -325,7 +325,7 @@ methods: {
 ```
 
 # 5、vue-aixos  => vue开发移动端项目小栗子
-捣鼓这个小栗子目的很简单，就是为了持续提高自己开发Vue的熟练度，这个小栗子解决几个目前移动端开发的某些问题，下面一起来看一下吧。<br>
+捣鼓这个小栗子目的很简单，就是为了持续提高自己开发Vue的熟练度(至少现在已经爱上组件化开发了)，这个小栗子解决几个目前移动端开发的某些问题，尽量不要吐槽没有使用最简的stylus语法，实属无奈，这个不谈。下面一起来看一下以下几个问题的解决吧。<br>
 
 **一：使用stylus解决移动端1px问题** <br>
 关于这个问题的产生，以及大概的解决原理，都在我Blog有较为详细的介绍，在此不再重复说明。现在仔细说一下利用stylus解决1px问题的过程，总共分为以下几个步骤：<br>
@@ -363,6 +363,55 @@ methods: {
 
 - 下载安装fastclick的jar包`npm install fastclick --save`；
 - 在通过vue-cli搭建起来的项目中，进入main.js文件，在里面导入`import fastClick from 'fastclick`，最后也是在main.js中使用`fastClick.attach(document.body)`。<br>
+
+**三：让页面在不同设备下显示不同的图片大小** <br>
+为了避免在物理像素较高的设备中图片变得不清晰，于是就有了这个需求。这个问题也挺好解决，涉及到的技术点还是和前端1px问题有很大的关系，因为都是需要判断DPR这个玩意。DPR是啥？看我的Blog去啊，下面我们来看核心代码（假设文件名为image.styl）：
+```
+bg-image($url)
+  background-image: url($url + "@2x.png")
+  @media (-webkit-min-device-pixel-ratio: 3),(min-device-pixel-ratio: 3)
+background-image: url($url + "@3x.png")
+```
+下面是我们应用在组件中的代码：
+```
+<template>
+  <div class="header">
+    <div class="h-back"></div>
+    <div class="h-title">惠农贷推荐信息</div>
+  </div>
+</template>
+<script>
+  export default {
+    name: "Header"
+  }
+</script>
+<style lang="stylus" scoped="scoped">
+  @import "../../../assets/styles/image.styl"
+  .h-back {
+  	height: 24px;
+  	width: 24px;
+  	bg-image("../imgs/back");
+  	background-size: 24px 24px;
+  	background-repeat: no-repeat;
+  	flex: 1;
+  }
+</style>
+```
+
+**四：通过axios和后台数据交互** <br>
+什么是axios在这不解释，为什么前端要做和后台数据交互的事情也不解释。下面马上来看如何使用axios如何获取本地mock后台数据：<br>
+
+- 下载安装axios的jar包，
+
+
+
+
+
+
+
+
+
+
 
 
 
