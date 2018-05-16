@@ -401,7 +401,71 @@ background-image: url($url + "@3x.png")
 **四：通过axios和后台数据交互** <br>
 什么是axios在这不解释，为什么前端要做和后台数据交互的事情也不解释。下面马上来看如何使用axios如何获取本地mock后台数据：<br>
 
-- 下载安装axios的jar包，
+- 下载安装axios的jar包，`cnpm install axios`或者`cnpm install axios --save`；
+- 在所需要获取后台数据的组件导入`import axios from 'axios'`；
+- 下面来看具体的全部代码：
+```
+<template>
+  <div class="recommend">
+    <header-item></header-item>
+    <middle-item :micontent="MiddleInfo"></middle-item>
+    <footer-item :focontent="SuveyProblemList"></footer-item>
+  </div>
+</template>
+
+<script>
+  import Header from './header/Header.vue'
+  import Middle from './middle/Middle.vue'
+  import Footer from './footer/Footer.vue'
+  // 导入axios插件
+  import axios from 'axios'
+  export default {
+    name: 'Recommend',
+    data() {
+      return {
+      	SuveyProblemList: [],        
+      }
+    },
+    mounted: function() {
+      this.$nextTick(function() {
+        this.getSuveyProblem();
+      });
+    },
+    methods: {
+      getSuveyProblem() {
+        var self = this;
+        axios({
+          method: 'get',
+          url: '../../../static/data/SurveyProblem.json',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        }).then(function(res) {
+        	var response = res.data;
+        	if(response.code == "001"){
+        		self.SuveyProblemList = res.data.data;
+        	}
+        }).catch(function(error) {
+          console.log("访问失败！")
+        })
+      }
+    },
+    components: {
+      'header-item': Header,
+      'middle-item': Middle,
+      'footer-item': Footer
+    }
+  }
+</script>
+
+<style>
+
+</style>
+```
+axios使用过程中目前遇到的坑：使用post方式是无法获得本地json数据的。解决方式参考这里[传送门](https://www.cnblogs.com/yuri2016/p/6784109.html)<br>
+
+以上就是在移动端开发中比较常遇到的问题，至于适配那方面，有时间再来扯一扯。下面是一些刚刚遇见的CSS样式，希望各位大佬能轻点喷.....<br>
+
 
 
 
