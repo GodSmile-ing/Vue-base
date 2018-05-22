@@ -328,7 +328,7 @@ methods: {
 捣鼓这个小栗子目的很简单，就是为了持续提高自己开发Vue的熟练度(至少现在已经享受组件化开发了)，这个小栗子解决几个目前移动端开发的某些问题，尽量不要吐槽我没有使用最简的stylus语法，实属无奈，这个不谈。下面一起来看一下以下几个问题的解决吧。<br>
 
 **一：使用stylus解决移动端1px问题** <br>
-关于这个问题的产生原因，以及大概的解决原理，都在我Blog有较为详细的介绍，在此不再重复说明。现在仔细说一下利用stylus解决1px问题的过程，总共分为以下几个步骤：<br>
+关于这个问题的产生原因，以及大概的解决原理，都在[我Blog](https://github.com/CruxF/IMOOC/issues/4)有较为详细的介绍，在此不再重复说明。现在仔细说一下利用stylus解决1px问题的过程，总共分为以下几个步骤：<br>
 
 - 下载安装stylus的依赖包`cnpm install stylus stylus-loader --save-dev`；
 - 将[这份源码](https://github.com/CruxF/Vue-base/blob/master/vue-axios/src/assets/styles/border.styl)copy到你的项目中，通过阅读这份源码和我之前写的博文，应该能理解移动端解决1px的原理；
@@ -464,7 +464,21 @@ background-image: url($url + "@3x.png")
 ```
 axios使用过程中目前遇到的坑：使用post方式是无法获得本地json数据的。解决方式参考这里[传送门](https://www.cnblogs.com/yuri2016/p/6784109.html)<br>
 
-以上就是在移动端开发中比较常遇到的问题，至于适配那方面，有时间再来扯一扯。下面是一些刚刚遇见的比较试用的CSS样式，希望各位大佬能轻点喷.....<br>
+**五：通过方法代替路由跳转**
+有很多需求是这样的：需要判断输入的内容提交到数据库是否正确再进行路由跳转，然而在<router-link>标签中绑定方法是无效的也是错误的，那么我们该如何解决呢？下面看具体代码：
+```
+HTML结构
+<button @click="RecommendSubmit()">提交</button>
+
+RecommendSubmit() {      	
+  this.$router.push({
+    path: '/Submit'
+  });   	
+}
+```
+【注意】尽量使用this.$router.push而不要使用this.$router.replace，因为经过实测：this.$router.replace最终会让页面跳转变得很奇怪。<br>
+
+以上就是在移动端开发中比较常遇到的问题，至于适配那方面，有时间再来扯一扯。下面是一些刚刚遇见的比较实用的CSS样式，希望各位大佬能轻点喷.....<br>
 
 **（1）改变input框内的placeholder文字颜色** <br>
 直接上代码，没啥好说的
@@ -514,6 +528,8 @@ input[type=radio] {
 首先将默认的单选按钮设置相对定位，并且高度为1px，即让默认的单选按钮区域消失。<br>
 接着在单选按钮的之前和之后各插入一个空元素（content），并且为这两个设置统一样式，如定位方式（position）、元素特性（display）、边框样式（border-radius）和过渡动画（transition）。<br>
 当然也要为这两个元素设置单独的样式，在这案例代码中，单选按钮之前的元素为一个背景颜色透明，边框为2px的区域，单选按钮之后的元素为一个有背景颜色的区域。最后是当选中单选按钮区域的时候，改变之前和之后的元素样式即可。<br>
+
+
 
 
 今天就先说到这，更多内容请看下回分解！<br>
