@@ -477,7 +477,7 @@ RecommendSubmit() {
     data: self.MiddleInfo
   }).then(function(res) {
     if(res.data.code === "001") {
-      console.log("访问接口成功");
+      console.log("访问后台接口数据成功");
       self.$router.push({
         path: "/Submit"
       })
@@ -488,7 +488,7 @@ RecommendSubmit() {
       msg: "ok"
     }
     if(obj.code === "001") {
-      console.log("访问接口成功");
+      console.log("访问模拟接口数据成功");
       self.$router.push({
         path: "/Submit"
       })
@@ -498,7 +498,7 @@ RecommendSubmit() {
 ```
 向后台返回数据是通过post方式，data代表着MiddleInfo这个对象里面存储的所有数据。由于存在跨域问题，因此then()方法无法执行，我们需要在catch()方法中模拟后台返回给前端的状态值，比如以上代码的obj对象就是模拟后台成功接收了前端的数据，然后再返回的一些数据。通过判断code这个值然后去做相应的操作。<br>
 
-等项目真正上线了，那么就不会有跨域的问题，此时then()中的操作就会被执行。<br>
+等项目真正上线了，那么就不会有跨域的问题，此时then()中的操作就会被执行。在打包文件（npm run build）为后台同学部署到服务器上的时候，记得把config文件夹的index.js文件中的两个assetsPublicPath属性后加个点，比如在本地运行：`assetsPublicPath: '/'`，在服务器上运行：`assetsPublicPath: './'`<br>
 
 
 **五：通过方法代替路由跳转**
