@@ -365,7 +365,7 @@ methods: {
 - 在通过vue-cli搭建起来的项目中，进入main.js文件，在里面导入`import fastClick from 'fastclick`，最后也是在main.js中使用`fastClick.attach(document.body)`。<br>
 
 **三：让页面在不同设备下显示不同的图片大小** <br>
-为了避免在物理像素较高的设备中图片变得不清晰，于是就有了这个需求。这个问题也挺好解决，涉及到的技术点还是和前端1px问题有很大的关系，因为都是需要判断DPR这个玩意。DPR是啥？看我的Blog去啊，下面我们来看核心代码（假设文件名为image.styl）：
+这个需求的产生背景是为了避免在物理像素较高的设备中图片变得不清晰。这个问题也挺好解决，涉及到的技术点还是和前端1px问题有很大的关系，因为都是需要判断DPR这个玩意。DPR是啥？看我的Blog去啊，下面我们来看核心代码（假设文件名为image.styl）：
 ```
 bg-image($url)
   background-image: url($url + "@2x.png")
@@ -377,7 +377,7 @@ background-image: url($url + "@3x.png")
 <template>
   <div class="header">
     <div class="h-back"></div>
-    <div class="h-title">惠农贷推荐信息</div>
+    <div class="h-title">推荐信息</div>
   </div>
 </template>
 <script>
@@ -462,7 +462,44 @@ background-image: url($url + "@3x.png")
 
 </style>
 ```
-axios使用过程中目前遇到的坑：使用post方式是无法获得本地json数据的。解决方式参考这里[传送门](https://www.cnblogs.com/yuri2016/p/6784109.html)<br>
+axios使用过程中目前遇到的坑：使用post方式是无法获得本地json数据的。解决方式参考这里[传送门](https://www.cnblogs.com/yuri2016/p/6784109.html)
+以上代码是从后台得到数据，那么下面我们看看如何返回一些数据到后台<br>
+```
+RecommendSubmit() {
+  // 向后端发送数据
+  var self = this;
+  axios({
+    method: 'post',
+    url: 'http://192.168.1.14:8080/hnd/save',
+    headers: {
+      'content-type': 'application/x-www-form-urlencoded'
+    },
+    data: self.MiddleInfo
+  }).then(function(res) {
+    if(res.data.code === "001") {
+      console.log("访问接口成功");
+      self.$router.push({
+        path: "/Submit"
+      })
+    }
+  }).catch(function(error) {
+    var obj = {
+      code: "001",
+      msg: "ok"
+    }
+    if(obj.code === "001") {
+      console.log("访问接口成功");
+      self.$router.push({
+        path: "/Submit"
+      })
+    }
+  })
+}
+```
+向后台返回数据是通过post方式，data代表着MiddleInfo这个对象里面存储的所有数据。由于存在跨域问题，因此then()方法无法执行，我们需要在catch()方法中模拟后台返回给前端的状态值，比如以上代码的obj对象就是模拟后台成功接收了前端的数据，然后再返回的一些数据。通过判断code这个值然后去做相应的操作。<br>
+
+等项目真正上线了，那么就不会有跨域的问题，此时then()中的操作就会被执行。<br>
+
 
 **五：通过方法代替路由跳转**
 有很多需求是这样的：需要判断输入的内容提交到数据库是否正确再进行路由跳转，然而在<router-link>标签中绑定方法是无效的也是错误的，那么我们该如何解决呢？下面看具体代码：
