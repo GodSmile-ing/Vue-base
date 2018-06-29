@@ -314,15 +314,7 @@ methods: {
 
 </style>
 ```
-### 项目运行
 
-```
-步骤一:git clone git@github.com:CruxF/Vue-base.git
-步骤二:cd Vue-base
-步骤三:cd vue-moudle
-步骤四:npm install  （前提：安装好了node、npm、git、webpack）
-步骤五:npm run dev
-```
 
 # 5、vue-aixos  => vue开发移动端项目小栗子
 捣鼓这个小栗子目的很简单，就是为了持续提高自己开发Vue的熟练度(至少现在已经享受组件化开发了)，这个小栗子解决几个目前移动端开发的某些问题，尽量不要吐槽我没有使用最简的stylus语法，实属无奈，这个不谈。下面一起来看一下以下几个问题的解决吧。<br>
