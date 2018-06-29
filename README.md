@@ -53,7 +53,7 @@ v-bind:class="{'check': item.checked}"含义是当item.checked为真的时候，
 这段代码有点绕，讲不太清楚，我还是直接放代码，根据代码来理解。<br>
 ```
 <div class="item-all-check">
-  <a href="javascript:void 0">
+  <a href="javascript:void(0)">
     <span class="item-check-btn" :class="{'check':checkAllFlag}">
       <svg class="icon icon-ok"><use xlink:href="#icon-ok"></use></svg>
     </span>
@@ -61,7 +61,7 @@ v-bind:class="{'check': item.checked}"含义是当item.checked为真的时候，
   </a>
 </div>
 <div class="item-all-del">
-  <a href="javascript:void 0" class="item-del-btn" @click="checkAll(false)">
+  <a href="javascript:void(0)" class="item-del-btn" @click="checkAll(false)">
     <span v-show="checkAllFlag">取消全选</span>
   </a>
 </div>
