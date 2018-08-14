@@ -493,7 +493,7 @@ RecommendSubmit() {
 等项目真正上线了，那么就不会有跨域的问题，此时then()中的操作就会被执行。在打包文件（npm run build）为后台同学部署到服务器上的时候，记得把config文件夹的index.js文件中的两个assetsPublicPath属性后加个点，比如在本地运行：`assetsPublicPath: '/'`，在服务器上运行：`assetsPublicPath: './'`<br>
 
 
-**五：通过方法代替路由跳转**
+**五：通过方法代替路由跳转** <br>
 有很多需求是这样的：需要判断输入的内容提交到数据库是否正确再进行路由跳转，然而在<router-link>标签中绑定方法是无效的也是错误的，那么我们该如何解决呢？下面看具体代码：
 ```
 HTML结构
