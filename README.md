@@ -51,7 +51,7 @@ v-bind:class="{'check': item.checked}"含义是当item.checked为真的时候，
 
 5、全选和取消全选
 这段代码有点绕，讲不太清楚，我还是直接放代码，根据代码来理解。<br>
-```
+```html
 <div class="item-all-check">
   <a href="javascript:void(0)">
     <span class="item-check-btn" :class="{'check':checkAllFlag}">
@@ -67,7 +67,7 @@ v-bind:class="{'check': item.checked}"含义是当item.checked为真的时候，
 </div>
 ```
 下面是JavaScript处理方法：<br>
-```
+```js
 checkAll: function (flag) {
   this.checkAllFlag = flag;
   var _this = this;
@@ -123,7 +123,7 @@ checkAll: function (flag) {
 6、配送方式选项<br>
 【分析】<br>
 实现思路与技巧都与第4步“选中样式切换”一样。可以看以下代码：<br>
-```
+```html
 <li v-bind:class="{'check': shippingMethod == 1}" @click="shippingMethod = 1">
   <div class="name">标准配送</div>
   <div class="price">Free</div>
@@ -193,7 +193,7 @@ checkAll: function (flag) {
 **1、父组件向子组件传值** 
 
 首先在父组件定义好数据，接着将子组件导入到父组件中。父组件只要在调用子组件的地方使用v-bind指令定义一个属性，并传值在该属性中即可，此时父组件的使命完成，请看下面关键代码：
-```
+```html
 <div class="parentOne">
   <children-item :content="item" v-for="item in list" :key="item.id"></children-item>
 </div>
@@ -207,7 +207,7 @@ checkAll: function (flag) {
 
 
 首先在子组件中要使用关键词`props`接收父组件传递过来的属性，然后直接对这个属性动手动脚就行了，十分简单，在这直接上完整源码：
-```
+```html
 <template>
   <div class="ChildrenOne">
     <ul>
@@ -235,7 +235,7 @@ checkAll: function (flag) {
 **2、子组件向父组件传值** 
 
 子组件向父组件传值这一个技术点有个专业名词，叫做“发布订阅模式”，很明显在这里子组件为发布方，而父组件为订阅方。根据这个专业名词，我们来看看子组件里面发生的事情。首先，需要触发子组件视图层里的某个事件，接着由该事件触发的方法中又使用关键方法`$emit()`发布了一个自定义的事件，并且能够传入相关的参数。子组件所要的事情就只有这么多，下面我们看看核心源码：
-```
+```js
 ChildrenOnclick() {
   // 发布自定义事件
   this.$emit("delete", this.index)
@@ -247,7 +247,7 @@ ChildrenOnclick() {
 
 
 在父组件中，只要订阅由子组件发布的自定义事件即可。只要子组件的自定义事件被触发，那么父组件就会执行相关的方法，下面是核心代码：
-```
+```html
 <children-item 
    :content="item" 
    :index="index" 
@@ -265,7 +265,7 @@ ChildrenOnclick() {
 **3、兄弟组件传值** 
 
 这块我还不是灰常明白，只是知道大概如何去实现。首先在由vue-cli搭建起来的项目中的main.js创建一个事件总线，也就是中转站，作为通信的桥梁。核心代码如下：
-```
+```js
 // 建立中转站，实现组件与组件之间的传值
 let bus = new Vue()
 Vue.prototype.bus = bus
@@ -274,7 +274,7 @@ main.js[完整代码](https://github.com/CruxF/Vue-base/blob/master/vue-module/s
 
 
 接着我们在发送方组件里面使用关键字`$emit()`定义一个自定义事件，并传入参数。核心代码如下：
-```
+```js
 methods: {
   btnMessage() {
     this.bus.$emit("ReceiveMessage", this.message)
@@ -287,7 +287,7 @@ methods: {
 
 
 最后是接收方组件，只要使用`this.bus.$on`关键字就能够监听到发送方触发的事件，并在内部通过一个函数接收传入进来的参数，执行相关的动作，下面请看完整代码：
-```
+```html
 <template>
   <div class="brotherOne">
     <h5>我是接收方组件，下面是接收到的信息</h5>
@@ -325,7 +325,7 @@ methods: {
 - 下载安装stylus的依赖包`cnpm install stylus stylus-loader --save-dev`；
 - 将[这份源码](https://github.com/CruxF/Vue-base/blob/master/vue-axios/src/assets/styles/border.styl)copy到你的项目中，通过阅读这份源码和我之前写的博文，应该能理解移动端解决1px的原理；
 - 最后是在需要解决1px的组件中导入该文件，为目标元素设置相应的类名，具体的请看下面的示例：
-```
+```html
 <template>
   <div class="middle">
     <ul>
@@ -358,14 +358,14 @@ methods: {
 
 **三：让页面在不同设备下显示不同的图片大小** <br>
 这个需求的产生背景是为了避免在物理像素较高的设备中图片变得不清晰。这个问题也挺好解决，涉及到的技术点还是和前端1px问题有很大的关系，因为都是需要判断DPR这个玩意。DPR是啥？看我的Blog去啊，下面我们来看核心代码（假设文件名为image.styl）：
-```
+```js
 bg-image($url)
   background-image: url($url + "@2x.png")
   @media (-webkit-min-device-pixel-ratio: 3),(min-device-pixel-ratio: 3)
 background-image: url($url + "@3x.png")
 ```
 下面是我们应用在组件中的代码：
-```
+```html
 <template>
   <div class="header">
     <div class="h-back"></div>
@@ -396,7 +396,7 @@ background-image: url($url + "@3x.png")
 - 下载安装axios的jar包，`cnpm install axios`或者`cnpm install axios --save`；
 - 在所需要获取后台数据的组件导入`import axios from 'axios'`；
 - 下面来看具体的全部代码：
-```
+```html
 <template>
   <div class="recommend">
     <header-item></header-item>
@@ -456,7 +456,7 @@ background-image: url($url + "@3x.png")
 ```
 axios使用过程中目前遇到的坑：使用post方式是无法获得本地json数据的。解决方式参考这里[传送门](https://www.cnblogs.com/yuri2016/p/6784109.html)
 以上代码是从后台得到数据，那么下面我们看看如何返回一些数据到后台<br>
-```
+```js
 RecommendSubmit() {
   // 向后端发送数据
   var self = this;
@@ -495,7 +495,7 @@ RecommendSubmit() {
 
 **五：通过方法代替路由跳转** <br>
 有很多需求是这样的：需要判断输入的内容提交到数据库是否正确再进行路由跳转，然而在<router-link>标签中绑定方法是无效的也是错误的，那么我们该如何解决呢？下面看具体代码：
-```
+```html
 HTML结构
 <button @click="RecommendSubmit()">提交</button>
 
@@ -519,7 +519,7 @@ input::-webkit-input-placeholder {
 
 **（2）单选按钮切换自定义样式** <br>
 先看下面一段代码，再来细细分析一下
-```
+```css
 input[type=radio] {
     position: relative;
     width: 25px;
